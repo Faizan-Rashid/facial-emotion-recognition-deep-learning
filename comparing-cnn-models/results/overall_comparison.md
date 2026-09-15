@@ -1,0 +1,10 @@
+| Model Identifier   | Architecture        |   Test Loss |   Test Accuracy | FLOPs         | MACs         | Parameters   |
+|:-------------------|:--------------------|------------:|----------------:|:--------------|:-------------|:-------------|
+| mobilenet_v3_small | MobileNetV3         |      0.8674 |         71.0783 | 114.6 MFLOPS  | 55.49 MMACs  | 1.53 M       |
+| shufflenet_v2_x0_5 | ShuffleNetV2 (0.5x) |      0.9141 |         67.2193 | 82.09 MFLOPS  | 39.46 MMACs  | 348.97 K     |
+| shufflenet_v2_x1_0 | ShuffleNetV2 (1.0x) |      0.8533 |         70.3121 | 293.47 MFLOPS | 143.89 MMACs | 1.26 M       |
+| efficientnet_b0    | EfficientNet B0     |      0.8211 |         73.3352 | 791.1 MFLOPS  | 384.54 MMACs | 4.02 M       |
+| efficientnet_b1    | EfficientNet B1     |      0.8122 |         72.0953 | 1.17 GFLOPS   | 568.38 MMACs | 6.52 M       |
+| mnasnet0_5         | MNASNet (0.5x)      |      0.9425 |         66.1187 | 215.19 MFLOPS | 103.18 MMACs | 946.48 K     |
+| squeezenet1_1      | SqueezeNet v1.1     |      1.0019 |         63.2349 | 532.67 MFLOPS | 263.23 MMACs | 726.09 K     |
+| resnet18           | ResNet-18           |      0.8459 |         71.0365 | 3.64 GFLOPS   | 1.81 GMACs   | 11.18 M      |
