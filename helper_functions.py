@@ -5,6 +5,8 @@ from tqdm.auto import tqdm
 from timeit import default_timer as time
 from typing import Callable
 
+device = "cuda" torch.cuda.is_available() else "cpu"
+
 # STEP FUNCTIONS FOR TRAINING 
 def train_step(model: torch.nn.Module,
                loss_fn: torch.nn.Module,
