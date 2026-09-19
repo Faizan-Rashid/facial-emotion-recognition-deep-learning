@@ -362,3 +362,130 @@ def load_saved_checkpoint(model: torch.nn.Module,
             print("🔄 Loaded model weights only.")
 
     return checkpoint
+
+
+# TRAIN MODEL AND TRACK EXPERIMENTS USING TENSORBOARD'S SummaryWriter
+def train(model: torch.nn.Module,
+          loss_fn: torch.nn.Module,
+          optimizer: torch.optim.Optimizer,
+          accuracy_fn: Callable,
+          train_dataloader: torch.utils.data.DataLoader,
+          test_dataloader: torch.utils.data.DataLoader,
+          train_step: Callable,
+          test_step: Callable,
+          print_train_time: Callable,
+          lr_scheduler: Callable,
+          patience: int,
+          epochs: int,
+          device: str=device,
+          writer: torch.utils.tensorboard.writer.SummaryWriter=None):
+
+    ### INITIALIZE RESULTS DICTIONARY
+    training_results = {
+        "results": [],
+        "train_time": 0,
+        "model_layers": None,
+        "device": device
+    }
+
+    # FIX: Changed 'timer()' to the correct imported 'time()' alias
+    time_before_train = time()
+
+    # Variables for early stopping
+    patience_counter = 0
+    best_loss = float("inf")
+
+    for epoch in tqdm(range(epochs), desc="Total Epochs"):
+        print(f"\nepoch: {epoch}--------------")
+
+        ### Training Step
+        train_loss, train_acc = train_step(
+            model=model,
+            loss_fn=loss_fn,
+            optimizer=optimizer,
+            accuracy_fn=accuracy_fn,
+            data_loader=train_dataloader,
+            device=device
+        )
+
+        ### Testing Step
+        test_loss, test_acc = test_step(
+            model=model,
+            loss_fn=loss_fn,
+            data_loader=test_dataloader,
+            accuracy_fn=accuracy_fn,
+            device=device
+        )
+
+        # Ensure tensor values are extracted to primitive float metrics
+        if isinstance(train_acc, torch.Tensor): train_acc = train_acc.item()
+        if isinstance(test_acc, torch.Tensor): test_acc = test_acc.item()
+
+        ### Apply lr scheduler
+        # For CosineAnnealingWarmRestarts, we step per epoch (or batch). No loss metric is passed.
+        if isinstance(
+            lr_scheduler,
+            torch.optim.lr_scheduler.ReduceLROnPlateau
+        ):
+            lr_scheduler.step(test_loss)
+        else:
+            lr_scheduler.step()
+
+        ### SAVE RESULTS
+        training_results['results'].append({
+            "epoch": epoch,
+            "train_loss": train_loss,
+            "train_acc": train_acc,
+            "test_loss": test_loss,
+            "test_acc": test_acc,
+        })
+
+        ### TRACK EXPERIMENTS
+        if writer is not None:
+          writer.add_scalars(main_tag="Loss",
+                            tag_scalar_dict={
+                                "train_loss": train_loss,
+                                "test_loss": test_loss
+                            },
+                            global_step=epoch)
+
+          writer.add_scalars(main_tag="Accuracy",
+                            tag_scalar_dict={
+                                "train_acc": train_acc,
+                                "test_acc": test_acc
+                            },
+                            global_step=epoch)
+
+        ### Apply early stopping
+        if test_loss < best_loss:
+            best_loss = test_loss
+            patience_counter = 0
+            torch.save(model.state_dict(), "best_model.pt")
+            print(f"🔥 New best model saved with test loss: {test_loss:.4f}")
+        else:
+            patience_counter += 1
+
+        if patience_counter >= patience:
+            print("🛑 Early stopping triggered")
+            break
+
+    # FIX: Changed 'timer()' to 'time()'
+    time_after_train = time()
+
+    # FIX: Updated hardcoded "cuda" to the dynamic 'device' parameter
+    train_time = print_train_time(time_before_train, time_after_train, device=device)
+
+    ### LOAD THE BEST WEIGHTS BACK IN MEMORY
+    model.load_state_dict(torch.load("best_model.pt", weights_only=True))
+
+    ### SAVE METADATA
+    training_results["train_time"] = train_time
+    training_results["device"] = device
+
+    if hasattr(model, "features"):
+        training_results["model_layers"] = str(model.features)
+    else:
+        training_results["model_layers"] = str(type(model))
+
+    return training_results
+
