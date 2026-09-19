@@ -42,15 +42,14 @@ repeated experiment 2 with more epochs
 
 ##### Experiment 4
 
-increase the learning rate to 0.01
+changed label smoothing to 0.001
 
-1. label smoothing 0.1
+1. label smoothing 0.01
 2. class weights used
-3. learning rate 0.01
+3. learning rate 0.001
 4. weight decay 0.01
 4. lr schedular ReduceLROnPlateau
 5. optimizer AdamW
-
 
 
 
