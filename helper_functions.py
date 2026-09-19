@@ -377,6 +377,7 @@ def train(model: torch.nn.Module,
           lr_scheduler: Callable,
           patience: int,
           epochs: int,
+          checkpoint_path: str,
           device: str=device,
           writer: torch.utils.tensorboard.writer.SummaryWriter=None):
 
