@@ -54,3 +54,22 @@ Train the complete model with this configuration
 
 ![alt text](./graphs/experiment-3-accuracy.png)
 ![alt text](./graphs/experiment-3-loss.png)
+
+
+##### Experiment 4
+
+We'll freeze the 1st and 3rd block
+
+1. label smoothing 0.15
+2. class weights used
+3. learning rate 5e-5
+4. weight decay 1e-2
+4. lr schedular CosineAnnealingLR
+5. optimizer AdamW
+
+- epochs given - 20
+- epochs completed - 10 
+- model final accuracy -  0.706046
+
+![alt text](./graphs/experiment-3-accuracy.png)
+![alt text](./graphs/experiment-3-loss.png)
