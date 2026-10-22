@@ -165,5 +165,43 @@ Train complete model
 - epochs completed - 5
 - model final accuracy - 0.714823
 
-![alt text](./graphs/experiment-8-accuracy.png)
-![alt text](./graphs/experiment-8-loss.png)
+![alt text](./graphs/experiment-9-accuracy.png)
+![alt text](./graphs/experiment-9-loss.png)
+
+
+##### Experiment 10
+
+stronger augumentation, batch size 64
+
+1. label smoothing 0.1
+2. class weights not used 
+3. learning rate 3e-4
+4. weight decay 1e-4
+4. lr schedular CosineAnnealingLR
+5. optimizer AdamW
+
+- epochs given - 20
+- epochs completed - 8
+- model final accuracy - 0.699777
+
+![alt text](./graphs/experiment-10-accuracy.png)
+![alt text](./graphs/experiment-10-loss.png)
+
+
+##### Experiment 11
+
+add torch sampler for class balancing  and class weights
+
+1. label smoothing 0.1
+2. class weights used 
+3. learning rate 3e-4
+4. weight decay 1e-4
+4. lr schedular CosineAnnealingLR
+5. optimizer AdamW
+
+- epochs given - 20
+- epochs completed - 20
+- model final accuracy - 0.705071
+
+![alt text](./graphs/experiment-11-accuracy.png)
+![alt text](./graphs/experiment-11-loss.png)
