@@ -71,5 +71,43 @@ We'll freeze the 1st and 3rd block
 - epochs completed - 10 
 - model final accuracy -  0.706046
 
-![alt text](./graphs/experiment-3-accuracy.png)
-![alt text](./graphs/experiment-3-loss.png)
+![alt text](./graphs/experiment-4-accuracy.png)
+![alt text](./graphs/experiment-4-loss.png)
+
+
+##### Experiment 5
+
+stronger augumentation, batch size 64
+
+1. label smoothing 0.1
+2. class weights not used
+3. learning rate 3e-4
+4. weight decay 1e-4
+4. lr schedular CosineAnnealingLR
+5. optimizer AdamW
+
+- epochs given - 20
+- epochs completed - 10 
+- model final accuracy -  0.6927
+
+![alt text](./graphs/experiment-5-accuracy.png)
+![alt text](./graphs/experiment-5-loss.png)
+
+
+##### Experiment 6
+
+add torch sampler for class balancing  and class weights
+
+1. label smoothing 0.1
+2. class weights used
+3. learning rate 3e-4
+4. weight decay 1e-4
+4. lr schedular CosineAnnealingLR
+5. optimizer AdamW
+
+
+- epochs given - 20
+- epochs completed - 6
+- model final accuracy -  0.6927
+
+graphs not available

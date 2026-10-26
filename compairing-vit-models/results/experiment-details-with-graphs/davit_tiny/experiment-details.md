@@ -128,3 +128,41 @@ same as experiment 6 but classw eights not used
 
 ![alt text](./graphs/experiment-7-accuracy.png)
 ![alt text](./graphs/experiment-7-loss.png)
+
+
+##### Experiment 8
+
+stronger augumentation, batch size 64
+
+1. label smoothing 0.1
+2. class weights not used
+3. learning rate 3e-4
+4. weight decay 1e-4
+4. lr schedular CosineAnnealingLR
+5. optimizer AdamW
+
+- epochs given - 20
+- epochs completed - 8
+- model final accuracy -  0.7081
+
+![alt text](./graphs/experiment-8-accuracy.png)
+![alt text](./graphs/experiment-8-loss.png)
+
+
+##### Experiment 11
+
+add torch sampler for class balancing  and class weights
+
+1. label smoothing 0.1
+2. class weights used
+3. learning rate 3e-4
+4. weight decay 1e-4
+4. lr schedular CosineAnnealingLR
+5. optimizer AdamW
+
+- epochs given - 20
+- epochs completed - 10
+- model final accuracy -  0.69141822
+
+![alt text](./graphs/experiment-9-accuracy.png)
+![alt text](./graphs/experiment-9-loss.png)
