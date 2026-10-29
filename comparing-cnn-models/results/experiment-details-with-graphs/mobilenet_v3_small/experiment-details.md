@@ -68,5 +68,5 @@ dont use class weights
 - epochs completed - 6
 - model final accuracy - 0.70911
 
-![alt text](./graphs/experiment-3-accuracy.png)
-![alt text](./graphs/experiment-3-loss.png)
+![alt text](./graphs/experiment-4-accuracy.png)
+![alt text](./graphs/experiment-4-loss.png)
