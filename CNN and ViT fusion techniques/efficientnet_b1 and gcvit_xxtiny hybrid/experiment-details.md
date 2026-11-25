@@ -172,7 +172,7 @@ repeat experiment 6
 
 #### Experiment 9
 
-batch size 512
+batch size 128
 
 1. label smoothing 0.1
 2. class weights not used
@@ -186,3 +186,64 @@ batch size 512
 
 ![alt text](./graphs/experiment-9-accuracy.png)
 ![alt text](./graphs/experiment-9-loss.png)
+
+
+#### Experiment 10
+
+experiment 9 repeated 
+batch size 128
+
+1. label smoothing 0.1
+2. class weights not used
+4. lr schedular oneCycleLR
+5. optimizer AdamW
+7. light transform 
+
+- epochs given - 20 
+- epochs completed - 19
+- model final accuracy - 0.730147
+
+![alt text](./graphs/experiment-10-accuracy.png)
+![alt text](./graphs/experiment-10-loss.png)
+
+
+#### Experiment 11
+
+batch size 256 
+
+1. label smoothing 0.1
+2. class weights not used
+4. lr schedular ReduceLrOnPleatue
+5. optimizer AdamW
+7. light transform 
+
+- epochs given - 20 
+- epochs completed - 9
+- model final accuracy - 0.735162
+
+![alt text](./graphs/experiment-11-accuracy.png)
+![alt text](./graphs/experiment-11-loss.png)
+
+
+#### Experiment 12
+
+batch size 224
+
+1. label smoothing 0.1
+2. class weights not used
+4. lr schedular ReduceLrOnPleatue
+5. optimizer AdamW
+7. light transform 
+
+- epochs given - 20 
+- epochs completed - 19
+- model final accuracy - 0.732655
+
+![alt text](./graphs/experiment-12-accuracy.png)
+![alt text](./graphs/experiment-12-loss.png)
+
+
+
+Try
+indexing algorithm 
+better classifier 
